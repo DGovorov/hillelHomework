@@ -66,9 +66,11 @@ public class FloatCollectionSumTest {
         arrayList.add(-1f);
         arrayList.add(-1f);
         arrayList.add(-1f);
+        arrayList.add(-1f);
+        arrayList.add(-1f);
 
         float result = example.sum(arrayList);
-        float expected = 16_777_215f;
+        float expected = 16_777_213f;
         Assert.assertEquals(result, expected, 0);
     }
 
@@ -110,6 +112,23 @@ public class FloatCollectionSumTest {
     }
 
     @Test
+    public void sumShouldWorkWithNegativeMagicNumber() {
+        FloatCollectionSum example = new FloatCollectionSum();
+        ArrayList<Float> arrayList = new ArrayList<>();
+
+        arrayList.add(-16_777_216f);
+        arrayList.add(-1f);
+        arrayList.add(-1f);
+        arrayList.add(-1f);
+        arrayList.add(-1f);
+        arrayList.add(-1f);
+
+        float result = example.sum(arrayList);
+        float expected = -16_777_221f;
+        Assert.assertEquals(result, expected, 0);
+    }
+
+/*    @Test
     public void sumShouldWorkWithRealNumber() {
         FloatCollectionSum example = new FloatCollectionSum();
         ArrayList<Float> arrayList = new ArrayList<>();
@@ -125,5 +144,5 @@ public class FloatCollectionSumTest {
         float result = example.sum(arrayList);
         float expected = 16_777_2.19f;
         Assert.assertEquals(result, expected, 0);
-    }
+    }*/
 }
