@@ -37,23 +37,13 @@ public class FloatCollectionSumTest {
         FloatCollectionSum example = new FloatCollectionSum();
         ArrayList<Float> arrayList = new ArrayList<>();
 
-        Float tempSum;
-
         arrayList.add(16_777_216f);
         arrayList.add(1f);
-        tempSum = example.sum(arrayList);
-        System.out.println(tempSum);
         arrayList.add(1f);
-        tempSum = example.sum(arrayList);
-        System.out.println(tempSum);
         arrayList.add(1f);
-        tempSum = example.sum(arrayList);
-        System.out.println(tempSum);
-
 
         float result = example.sum(arrayList);
         float expected = 16_777_219f;
-        System.out.println();
         Assert.assertEquals(result, expected, 0);
     }
 
@@ -87,7 +77,6 @@ public class FloatCollectionSumTest {
         float result = example.sum(arrayList);
         float expected = 16_777_216f + 17_000_000f;
         Assert.assertEquals(result, expected, 0);
-        System.out.println(expected);
     }
 
     @Test
@@ -103,8 +92,6 @@ public class FloatCollectionSumTest {
         arrayList.add(2f);
         arrayList.add(-1f);
         arrayList.add(4f);
-
-        System.out.println(example.sum(arrayList));
 
         float result = example.sum(arrayList);
         float expected = 16_777_222f;
@@ -128,21 +115,21 @@ public class FloatCollectionSumTest {
         Assert.assertEquals(result, expected, 0);
     }
 
-/*    @Test
+    @Test
     public void sumShouldWorkWithRealNumber() {
         FloatCollectionSum example = new FloatCollectionSum();
         ArrayList<Float> arrayList = new ArrayList<>();
 
-        arrayList.add(16_777_2.16f);
-        arrayList.add(0.01f);
-        System.out.println(example.sum(arrayList));
-        arrayList.add(0.01f);
-        System.out.println(example.sum(arrayList));
-        arrayList.add(0.01f);
-        System.out.println(example.sum(arrayList));
+        arrayList.add(16_777_21.6f);
+        arrayList.add(0.1f);
+        arrayList.add(0.1f);
+        arrayList.add(0.1f);
+        arrayList.add(0.1f);
+        arrayList.add(0.1f);
+        arrayList.add(0.1f);
 
         float result = example.sum(arrayList);
-        float expected = 16_777_2.19f;
+        float expected = 16_777_22.2f;
         Assert.assertEquals(result, expected, 0);
-    }*/
+    }
 }

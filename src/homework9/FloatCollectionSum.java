@@ -9,16 +9,10 @@ import java.util.List;
  */
 public class FloatCollectionSum {
 
-    public static void main(String[] args) {
-        Float test = 0.0f;
-        float compare = 0;
-
-        System.out.println(test == 0);
-    }
-
     /**
      * Working just fine with natural_numbers in all cases,
-     * Can't calculate around real_numbers like: 1_677_721.6 + 0.1;
+     * Can't calculate around real_numbers like:
+     * 1_677_721.6 + 0.1 + 0.1;
      * @param collection of Float
      * @return Sum of all elements in collection
      */
@@ -79,6 +73,30 @@ public class FloatCollectionSum {
         List<Float> temp = new ArrayList<>();
         for (Float element : collection) {
             if (sum + element == sum && element != 0) {
+                temp.add(element);
+            } else {
+                sum += element;
+            }
+        }
+        if (temp.size() != 0) {
+            FloatCollectionSum floatCollectionSum = new FloatCollectionSum();
+            return sum + floatCollectionSum.sum(temp);
+        }
+        return sum;
+    }
+
+    /**
+     *Variation of sum3, with different condition,
+     *Still doesnt work with real numbers:
+     * 1_677_721.6 + 0.1 + 0.1 = 1_677_721.9;
+     * @param collection of Float
+     * @return Sum of all elements in collection
+     */
+    public float sum4(Collection<Float> collection) {
+        float sum = 0;
+        List<Float> temp = new ArrayList<>();
+        for (Float element : collection) {
+            if(sum + element - element != sum) {
                 temp.add(element);
             } else {
                 sum += element;
