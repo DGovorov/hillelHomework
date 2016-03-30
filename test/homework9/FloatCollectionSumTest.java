@@ -41,9 +41,11 @@ public class FloatCollectionSumTest {
         arrayList.add(1f);
         arrayList.add(1f);
         arrayList.add(1f);
+        arrayList.add(1f);
+        arrayList.add(1f);
 
         float result = example.sum(arrayList);
-        float expected = 16_777_219f;
+        float expected = 16_777_221f;
         Assert.assertEquals(result, expected, 0);
     }
 
@@ -76,6 +78,8 @@ public class FloatCollectionSumTest {
 
         float result = example.sum(arrayList);
         float expected = 16_777_216f + 17_000_000f;
+        System.out.println(result);
+
         Assert.assertEquals(result, expected, 0);
     }
 
@@ -120,7 +124,7 @@ public class FloatCollectionSumTest {
         FloatCollectionSum example = new FloatCollectionSum();
         ArrayList<Float> arrayList = new ArrayList<>();
 
-        arrayList.add(16_777_21.6f);
+        arrayList.add(1_677_721.6f);
         arrayList.add(0.1f);
         arrayList.add(0.1f);
         arrayList.add(0.1f);
@@ -129,7 +133,22 @@ public class FloatCollectionSumTest {
         arrayList.add(0.1f);
 
         float result = example.sum(arrayList);
-        float expected = 16_777_22.2f;
+        float expected = 1_677_722.2f;
         Assert.assertEquals(result, expected, 0);
     }
+
+    /*@Test
+    public void sumShouldWorkWithRealNumberUltimate() {
+        FloatCollectionSum example = new FloatCollectionSum();
+        ArrayList<Float> arrayList = new ArrayList<>();
+
+        arrayList.add(1_677_720.0f);
+        for (int i = 0; i < 17_000_000; i++) {
+            arrayList.add(0.1f);
+        }
+
+        float result = example.sum(arrayList);
+        float expected = 1_677_720.0f + 1_700_000f;
+        Assert.assertEquals(result, expected, 0);
+    }*/
 }

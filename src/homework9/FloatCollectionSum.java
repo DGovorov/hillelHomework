@@ -9,14 +9,23 @@ import java.util.List;
  */
 public class FloatCollectionSum {
 
+    public static void main(String[] args) {
+        for (int i = 1; i < 10; i++) {
+            System.out.print(16_777_221f + i + "\t");
+
+            System.out.println(16_777_221f + i + 1);
+        }
+    }
+
     /**
+     * sum1
      * Working just fine with natural_numbers in all cases,
      * Can't calculate around real_numbers like:
      * 1_677_721.6 + 0.1 + 0.1;
      * @param collection of Float
      * @return Sum of all elements in collection
      */
-    public float sum(Collection<Float> collection) {
+    public float sum1(Collection<Float> collection) {
         float sum = 0;
         int deviation = 0;
         for (Float o : collection) {
@@ -36,6 +45,7 @@ public class FloatCollectionSum {
     }
 
     /**
+     * sum2
      * More appropriate logic, requires tuning to be usable
      * @param collection of Float
      * @return Sum of all elements in collection
@@ -44,9 +54,6 @@ public class FloatCollectionSum {
         float sum1 = 0;
         float sum2 = 0;
         for (Float element : collection) {
-            if (sum1 + element == sum1 && sum1 == 0) {
-                sum1 = element;
-            }
             if (sum1 + element == sum1 && element != 0) {
                 if (sum2 != 0) {
                     sum2 += element;
@@ -63,6 +70,7 @@ public class FloatCollectionSum {
     }
 
     /**
+     * sum3
      * Much slower logic with recursive approach.
      * Can't guarantee very accurate results.
      * @param collection of Float
@@ -86,6 +94,7 @@ public class FloatCollectionSum {
     }
 
     /**
+     * sum4
      *Variation of sum3, with different condition,
      *Still doesnt work with real numbers:
      * 1_677_721.6 + 0.1 + 0.1 = 1_677_721.9;
@@ -107,5 +116,31 @@ public class FloatCollectionSum {
             return sum + floatCollectionSum.sum(temp);
         }
         return sum;
+    }
+
+    /**
+     * sum5
+     * Variation of sum2
+     * More appropriate logic, requires tuning to be usable
+     * @param collection of Float
+     * @return Sum of all elements in collection
+     */
+    public float sum(Collection<Float> collection) {
+        float sum1 = 0;
+        float sum2 = 0;
+        for (Float element : collection) {
+            if (sum1 + element - element != sum1) {
+                if (sum2 != 0) {
+                    sum2 += element;
+                    sum1 += sum2;
+                    sum2 = 0;
+                } else {
+                    sum2 += element;
+                }
+            } else {
+                sum1 += element;
+            }
+        }
+        return sum1 + sum2;
     }
 }
