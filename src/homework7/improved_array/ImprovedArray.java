@@ -1,9 +1,11 @@
 package homework7.improved_array;
 
+import homework9.custom_linked_list.Improved;
+
 /**
  * Created by Dim on 12.03.2016.
  */
-public class ImprovedArray {
+public class ImprovedArray implements Improved{
 
     private Object[] elements = new Object[10];
     private int elementCounter;

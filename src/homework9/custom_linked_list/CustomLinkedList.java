@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Created by User on 22.03.2016.
  */
-public class CustomLinkedList implements Iterable {
+public class CustomLinkedList implements Improved, Iterable {
 
     private ListElement next;
 
