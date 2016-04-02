@@ -7,13 +7,36 @@ import java.util.Scanner;
  */
 public class GuessingGameMain {
     public static void main(String[] args) {
-        int gameLowerNumber = -1000000;
-        int gameUpperNumber = 1000000;
 
-        GuessTheNumber game = new GuessTheNumber(gameLowerNumber,gameUpperNumber);
+        humanGuessComputersNumber();
 
-        //guessManually(game);
+        computerGuessHumansNumber();
+    }
 
+    private static void humanGuessComputersNumber() {
+        int gameLowerNumber = 0;
+        int gameUpperNumber = 100;
+
+        GuessTheNumber game = new GuessTheNumber(gameLowerNumber, gameUpperNumber);
+        guessManually(game);
+    }
+
+    private static void computerGuessHumansNumber() {
+        Scanner scanner = new Scanner(System.in);
+        int gameLowerNumber;
+        int gameUpperNumber;
+        int number;
+
+        System.out.println("HELLO THERE! LET'S PLAY A GAME \"GUESS THE NUMBER\", YOU CAN INPUT YOUR NUMBER TO GUESS!");
+        System.out.println("But first, there is a little formality, you have to determine lower and upper limits");
+        System.out.println("INPUT LOWER");
+        gameLowerNumber = scanner.nextInt();
+        System.out.println("INPUT UPPER");
+        gameUpperNumber = scanner.nextInt();
+        System.out.print("YOUR NUMBER: ");
+        number = scanner.nextInt();
+
+        GuessTheNumber game = new GuessTheNumber(gameLowerNumber, gameUpperNumber, number);
         guessAutomatically(gameLowerNumber, gameUpperNumber, game);
     }
 
@@ -21,7 +44,7 @@ public class GuessingGameMain {
         System.out.println();
         System.out.println("===CPU PLAYER===");
         GuessingGamer gamer = new GuessingGamer(game);
-        gamer.start(gameLowerNumber,gameUpperNumber);
+        gamer.start(gameLowerNumber, gameUpperNumber);
         System.out.println();
     }
 

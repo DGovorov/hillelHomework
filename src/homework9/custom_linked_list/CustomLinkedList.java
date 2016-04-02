@@ -75,8 +75,10 @@ public class CustomLinkedList implements Improved, Iterable {
             return false;
         }
 
-        for (int i = 0; i < size(); i++) {
-            if (!(get(i).equals(other.get(i)))) {
+        Iterator thisIterator = iterator();
+        Iterator otherIterator = other.iterator();
+        while (thisIterator.hasNext()) {
+            if (!(thisIterator.next().equals(otherIterator.next()))) {
                 return false;
             }
         }

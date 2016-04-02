@@ -9,19 +9,12 @@ import java.util.List;
  */
 public class FloatCollectionSum {
 
-    public static void main(String[] args) {
-        for (int i = 1; i < 10; i++) {
-            System.out.print(16_777_221f + i + "\t");
-
-            System.out.println(16_777_221f + i + 1);
-        }
-    }
-
     /**
      * sum1
      * Working just fine with natural_numbers in all cases,
      * Can't calculate around real_numbers like:
      * 1_677_721.6 + 0.1 + 0.1;
+     *
      * @param collection of Float
      * @return Sum of all elements in collection
      */
@@ -47,6 +40,7 @@ public class FloatCollectionSum {
     /**
      * sum2
      * More appropriate logic, requires tuning to be usable
+     *
      * @param collection of Float
      * @return Sum of all elements in collection
      */
@@ -73,6 +67,7 @@ public class FloatCollectionSum {
      * sum3
      * Much slower logic with recursive approach.
      * Can't guarantee very accurate results.
+     *
      * @param collection of Float
      * @return Sum of all elements in collection
      */
@@ -88,16 +83,17 @@ public class FloatCollectionSum {
         }
         if (temp.size() != 0) {
             FloatCollectionSum floatCollectionSum = new FloatCollectionSum();
-            return sum + floatCollectionSum.sum(temp);
+            return sum + floatCollectionSum.sum3(temp);
         }
         return sum;
     }
 
     /**
      * sum4
-     *Variation of sum3, with different condition,
-     *Still doesnt work with real numbers:
+     * Variation of sum3, with different condition,
+     * Still doesnt work with real numbers:
      * 1_677_721.6 + 0.1 + 0.1 = 1_677_721.9;
+     *
      * @param collection of Float
      * @return Sum of all elements in collection
      */
@@ -105,7 +101,7 @@ public class FloatCollectionSum {
         float sum = 0;
         List<Float> temp = new ArrayList<>();
         for (Float element : collection) {
-            if(sum + element - element != sum) {
+            if (sum + element - element != sum) {
                 temp.add(element);
             } else {
                 sum += element;
@@ -113,7 +109,7 @@ public class FloatCollectionSum {
         }
         if (temp.size() != 0) {
             FloatCollectionSum floatCollectionSum = new FloatCollectionSum();
-            return sum + floatCollectionSum.sum(temp);
+            return sum + floatCollectionSum.sum4(temp);
         }
         return sum;
     }
@@ -122,10 +118,11 @@ public class FloatCollectionSum {
      * sum5
      * Variation of sum2
      * More appropriate logic, requires tuning to be usable
+     *
      * @param collection of Float
      * @return Sum of all elements in collection
      */
-    public float sum(Collection<Float> collection) {
+    public float sum5(Collection<Float> collection) {
         float sum1 = 0;
         float sum2 = 0;
         for (Float element : collection) {
@@ -142,5 +139,23 @@ public class FloatCollectionSum {
             }
         }
         return sum1 + sum2;
+    }
+
+    /**
+     * sum6
+     * Kahan's summation algorithm.
+     * @param collection of Float
+     * @return Sum of all elements in collection
+     */
+    static float sum(Collection<Float> collection) {
+        float sum = 0;
+        float c = 0;
+        for (Float v : collection) {
+            float y = v - c;
+            float t = sum + y;
+            c = (t - sum) - y;
+            sum = t;
+        }
+        return sum;
     }
 }

@@ -16,6 +16,13 @@ public class GuessTheNumber {
         gameOver = false;
     }
 
+    public GuessTheNumber(int lowerNumber, int upperNumber, int targetNumber) {
+        System.out.println("NEW GAME STARTED!");
+        System.out.println("Guess the number in '" + lowerNumber + "' - '" + upperNumber + "' range!");
+        this.targetNumber = targetNumber;
+        gameOver = false;
+    }
+
     private void generateTarget(int lowerNumber, int upperNumber) {
         Random r = new Random();
         targetNumber = r.nextInt((upperNumber - lowerNumber) + 1) + lowerNumber;
