@@ -1,11 +1,13 @@
-package homework7.improved_array;
+package homework7.improvedArray;
 
-import homework9.custom_linked_list.Improved;
+import homework9.customLinkedList.MyList;
+
+import java.util.Iterator;
 
 /**
  * Created by Dim on 12.03.2016.
  */
-public class ImprovedArray implements Improved{
+public class ImprovedArray implements MyList {
 
     private Object[] elements = new Object[10];
     private int elementCounter;
@@ -25,7 +27,9 @@ public class ImprovedArray implements Improved{
     }
 
     public Object get(int index) {
+        indexOutOfBoundsCheck("get()", index);
         return elements[index];
+
     }
 
 /*    public void set(int index, Object obj) {
@@ -37,6 +41,7 @@ public class ImprovedArray implements Improved{
     }*/
 
     public void swap(int firstElementIndex, int secondElementIndex) {
+        indexOutOfBoundsCheck("swap()", firstElementIndex, secondElementIndex);
         Object temp = get(firstElementIndex);
         elements[firstElementIndex] = get(secondElementIndex);
         elements[secondElementIndex] = temp;
@@ -92,11 +97,10 @@ public class ImprovedArray implements Improved{
     }
 
     public void remove(int index) {
-        if (index < 0 || index >= size()) {
-            return;
-        }
+        indexOutOfBoundsCheck("remove()", index);
         System.arraycopy(elements, index + 1, elements, index, elements.length - 1 - index);
         elementCounter--;
+
     }
 
     public void remove(Object obj) {
@@ -104,6 +108,14 @@ public class ImprovedArray implements Improved{
             if (get(i).equals(obj)) {
                 remove(i);
                 return;
+            }
+        }
+    }
+
+    private void indexOutOfBoundsCheck(String methodName, int... indexes) {
+        for (int index : indexes) {
+            if (index < 0 || index >= size()) {
+                throw new IndexOutOfBoundsException(methodName + " called, size: " + size() + " index: " + index);
             }
         }
     }
@@ -143,5 +155,10 @@ public class ImprovedArray implements Improved{
             }
         }
         return result;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new ImprovedArrayIterator(this);
     }
 }

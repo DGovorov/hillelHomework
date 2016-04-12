@@ -1,6 +1,8 @@
-package homework7.improved_array;
+package homework7.improvedArray;
 
 import homework7.animals.Dog;
+
+import java.util.Iterator;
 
 /**
  * Created by Dim on 12.03.2016.
@@ -29,5 +31,26 @@ public class ImprovedArrayMain {
         secondArray.add("Four");
         secondArray.add(true);
         System.out.println("firstArray equals secondArray: " + firstArray.equals(secondArray));
+
+        for (int i = 0; i < 10; i++) {
+            firstArray.add(4);
+            firstArray.add(5);
+            firstArray.add(5);
+        }
+
+        Iterator iterator = firstArray.iterator();
+        for (; iterator.hasNext();) {
+            if (iterator.next().equals(5)) {
+                iterator.remove();
+            }
+        }
+        System.out.println(firstArray);
+
+
+        Iterator anotherIterator = firstArray.iterator();
+        for (; anotherIterator.hasNext();) {
+            anotherIterator.remove();
+        }
+        System.out.println(firstArray);
     }
 }
