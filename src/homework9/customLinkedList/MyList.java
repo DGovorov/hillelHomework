@@ -1,9 +1,9 @@
-package homework9.custom_linked_list;
+package homework9.customLinkedList;
 
 /**
  * Created by Dim on 31.03.2016.
  */
-public interface Improved {
+public interface MyList extends Iterable {
 
     void add(Object value);
 

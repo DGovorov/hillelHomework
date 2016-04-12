@@ -1,4 +1,4 @@
-package homework8.comparison_keys;
+package homework8.comparisonKeys;
 
 /**
  * Created by Dim on 17.03.2016.

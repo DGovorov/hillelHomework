@@ -1,4 +1,4 @@
-package homework9.guess_game;
+package homework9.guessGame;
 
 /**
  * Created by Dim on 27.03.2016.
@@ -15,7 +15,6 @@ public class GuessingGamer {
         int outcome = game.guessing(guess);
 
         if (outcome == 0){
-            System.out.println("WIN!");
             return 0;
         }
         if (outcome < 0){

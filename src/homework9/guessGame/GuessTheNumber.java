@@ -1,4 +1,4 @@
-package homework9.guess_game;
+package homework9.guessGame;
 
 import java.util.Random;
 
@@ -10,15 +10,11 @@ public class GuessTheNumber {
     private boolean gameOver = true;
 
     public GuessTheNumber(int lowerNumber, int upperNumber) {
-        System.out.println("NEW GAME STARTED!");
-        System.out.println("Guess the number in '" + lowerNumber + "' - '" + upperNumber + "' range!");
         generateTarget(lowerNumber, upperNumber);
         gameOver = false;
     }
 
     public GuessTheNumber(int lowerNumber, int upperNumber, int targetNumber) {
-        System.out.println("NEW GAME STARTED!");
-        System.out.println("Guess the number in '" + lowerNumber + "' - '" + upperNumber + "' range!");
         this.targetNumber = targetNumber;
         gameOver = false;
     }
@@ -30,17 +26,13 @@ public class GuessTheNumber {
 
     public int guessing(int num) {
         if (num == targetNumber) {
-            System.out.println(targetNumber + "! CONGRATULATIONS! YOU WON!");
-            System.out.println("GAME OVER");
             gameOver = true;
             return 0;
         }
 
         if (targetNumber < num) {
-            System.out.println(num + "? My number is smaller");
             return -1;
         } else {
-            System.out.println(num + "? My number is bigger");
             return 1;
         }
     }

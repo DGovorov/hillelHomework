@@ -1,4 +1,4 @@
-package homework9.guess_game;
+package homework9.guessGame;
 
 import java.util.Scanner;
 
@@ -16,8 +16,8 @@ public class GuessingGameMain {
     private static void humanGuessComputersNumber() {
         int gameLowerNumber = 0;
         int gameUpperNumber = 100;
-
         GuessTheNumber game = new GuessTheNumber(gameLowerNumber, gameUpperNumber);
+        System.out.println("New game started! 0 - 100 range");
         guessManually(game);
     }
 
@@ -53,10 +53,18 @@ public class GuessingGameMain {
         System.out.println("===PROGRAMMER PLAYER===");
         Scanner s = new Scanner(System.in);
         int num;
+        int outcome;
         do {
             num = s.nextInt();
-            game.guessing(num);
+            outcome = game.guessing(num);
+            if (outcome < 0) {
+                System.out.println("Wrong! Target number is smaller! Try again!");
+            }
+            if (outcome > 0){
+                System.out.println("Wrong! Target number is bigger! Try again!");
+            }
+
         } while (!game.gameOver());
-        System.out.println();
+        System.out.println("Congratz! You won! Number was: " + num);
     }
 }

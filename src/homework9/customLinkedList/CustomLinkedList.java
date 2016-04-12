@@ -1,11 +1,11 @@
-package homework9.custom_linked_list;
+package homework9.customLinkedList;
 
 import java.util.Iterator;
 
 /**
  * Created by User on 22.03.2016.
  */
-public class CustomLinkedList implements Improved, Iterable {
+public class CustomLinkedList implements MyList {
 
     private ListElement next;
 
@@ -27,7 +27,7 @@ public class CustomLinkedList implements Improved, Iterable {
 
     public Object get(int index) {
         if (next == null) {
-            return null;
+            throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
         } else {
             return next.get(index);
         }

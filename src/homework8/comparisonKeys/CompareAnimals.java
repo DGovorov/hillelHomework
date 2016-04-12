@@ -1,4 +1,4 @@
-package homework8.comparison_keys;
+package homework8.comparisonKeys;
 
 import homework7.animals.Animal;
 

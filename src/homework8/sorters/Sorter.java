@@ -1,8 +1,8 @@
 package homework8.sorters;
 
-import homework7.improved_array.ImprovedArray;
-import homework8.comparison_keys.ComparableObjects;
-import homework8.comparison_keys.ComparisonKeys;
+import homework7.improvedArray.ImprovedArray;
+import homework8.comparisonKeys.ComparableObjects;
+import homework8.comparisonKeys.ComparisonKeys;
 
 /**
  * Created by Dim on 17.03.2016.
