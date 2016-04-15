@@ -3,6 +3,9 @@ package homework9.customLinkedList;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 /**
  * Created by User on 22.03.2016.
  */
@@ -10,14 +13,14 @@ public class CustomLinkedListTest {
 
     @Test
     public void newInstanceShouldBeCreatedEmpty() {
-        CustomLinkedList list = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
 
         Assert.assertEquals(0, list.size());
     }
 
     @Test
     public void sizeShouldChangeOnAdd() {
-        CustomLinkedList list = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
 
         list.add(new Object());
         list.add(new Object());
@@ -27,7 +30,7 @@ public class CustomLinkedListTest {
 
     @Test
     public void getShouldReturnAppropriateElement() {
-        CustomLinkedList list = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
 
         Object element = new Object();
 
@@ -39,8 +42,25 @@ public class CustomLinkedListTest {
     }
 
     @Test
+    public void getShouldThrowIOOBException() {
+        MyList list = new CustomLinkedList();
+
+        Object element = new Object();
+
+        list.add(element);
+        list.add(element);
+
+        try {
+            list.get(2);
+            Assert.fail();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
     public void containsShouldReturnCorrectResult() {
-        CustomLinkedList list = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
 
         list.add(25);
         list.add(50);
@@ -49,21 +69,9 @@ public class CustomLinkedListTest {
     }
 
     @Test
-    public void toStringTest() {
-        CustomLinkedList list = new CustomLinkedList();
-        CustomLinkedList list2 = new CustomLinkedList();
-
-        list.add(25);
-        list.add(50);
-
-        System.out.println(list.toString());
-        System.out.println(list2.toString());
-    }
-
-    @Test
     public void equalsTest() {
-        CustomLinkedList list = new CustomLinkedList();
-        CustomLinkedList list2 = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
+        MyList list2 = new CustomLinkedList();
 
         list.add(25);
         list.add(50);
@@ -77,8 +85,8 @@ public class CustomLinkedListTest {
 
     @Test
     public void removeByValueTest() {
-        CustomLinkedList list = new CustomLinkedList();
-        CustomLinkedList list2 = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
+        MyList list2 = new CustomLinkedList();
 
         list.add(25);
         list.add(50);
@@ -95,8 +103,8 @@ public class CustomLinkedListTest {
 
     @Test
     public void removeByIndexTest() {
-        CustomLinkedList list = new CustomLinkedList();
-        CustomLinkedList list2 = new CustomLinkedList();
+        MyList list = new CustomLinkedList();
+        MyList list2 = new CustomLinkedList();
 
         list.add(25);
         list.add(50);
@@ -109,5 +117,78 @@ public class CustomLinkedListTest {
         System.out.println("list after remove: " + list);
 
         Assert.assertEquals(true, list.equals(list2));
+    }
+
+    @Test
+    public void removeShouldThrowIOOBException() {
+        MyList list = new CustomLinkedList();
+
+        list.add(25);
+        list.add(50);
+
+        try {
+            list.remove(2);
+            System.out.println(list);
+            Assert.fail();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void iteratorRemoveShouldRemoveAppropriateElement(){
+        MyList list = new CustomLinkedList();
+        for (int i = 0; i < 5; i++) {
+            list.add(i);
+        }
+
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()){
+            if (iterator.next().equals(3)){
+                iterator.remove();
+            }
+        }
+
+        CustomLinkedList expectedList = new CustomLinkedList();
+        expectedList.add(0);
+        expectedList.add(1);
+        expectedList.add(2);
+        expectedList.add(4);
+
+        boolean[] comparedPairs = new boolean[4];
+        for (int i = 0; i < 4; i++) {
+            comparedPairs[i] = list.get(i).equals(expectedList.get(i));
+        }
+
+        boolean[] expected = new boolean[4];
+        Arrays.fill(expected, true);
+        Assert.assertArrayEquals(expected, comparedPairs);
+    }
+
+    @Test
+    public void iteratorRemoveShouldRemoveAllElementsFromArrayCorrectly(){
+        MyList list = new CustomLinkedList();
+        for (int i = 0; i < 5; i++) {
+            list.add(i);
+        }
+
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()){
+            iterator.remove();
+        }
+
+        Assert.assertEquals(list.size(), 0);
+    }
+
+    @Test
+    public void toStringTest() {
+        MyList list = new CustomLinkedList();
+        MyList list2 = new CustomLinkedList();
+
+        list.add(25);
+        list.add(50);
+
+        System.out.println(list.toString());
+        System.out.println(list2.toString());
     }
 }

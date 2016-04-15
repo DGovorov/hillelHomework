@@ -27,7 +27,7 @@ public class ImprovedArray implements MyList {
     }
 
     public Object get(int index) {
-        indexOutOfBoundsCheck("get()", index);
+        indexOutOfBoundsCheck(index);
         return elements[index];
 
     }
@@ -41,7 +41,7 @@ public class ImprovedArray implements MyList {
     }*/
 
     public void swap(int firstElementIndex, int secondElementIndex) {
-        indexOutOfBoundsCheck("swap()", firstElementIndex, secondElementIndex);
+        indexOutOfBoundsCheck(firstElementIndex, secondElementIndex);
         Object temp = get(firstElementIndex);
         elements[firstElementIndex] = get(secondElementIndex);
         elements[secondElementIndex] = temp;
@@ -96,26 +96,27 @@ public class ImprovedArray implements MyList {
 
     }
 
-    public void remove(int index) {
-        indexOutOfBoundsCheck("remove()", index);
+    public boolean remove(int index) {
+        indexOutOfBoundsCheck(index);
         System.arraycopy(elements, index + 1, elements, index, elements.length - 1 - index);
         elementCounter--;
-
+        return true;
     }
 
-    public void remove(Object obj) {
+    public boolean remove(Object obj) {
         for (int i = 0; i < size(); i++) {
             if (get(i).equals(obj)) {
                 remove(i);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
-    private void indexOutOfBoundsCheck(String methodName, int... indexes) {
+    private void indexOutOfBoundsCheck(int... indexes) {
         for (int index : indexes) {
             if (index < 0 || index >= size()) {
-                throw new IndexOutOfBoundsException(methodName + " called, size: " + size() + " index: " + index);
+                throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
             }
         }
     }

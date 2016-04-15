@@ -26,41 +26,47 @@ public class CustomLinkedList implements MyList {
     }
 
     public Object get(int index) {
-        if (next == null) {
+        if (next == null || index < 0) {
             throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
         } else {
-            return next.get(index);
-        }
-    }
-
-    public boolean contains(Object obj) {
-        if (next == null) {
-            return false;
-        } else {
-            return next.contains(obj);
-        }
-    }
-
-    public void remove(Object obj) {
-        if (next == null) {
-            return;
-        } else {
-            if (obj.equals(next.getValue())) {
-                next = next.getNext();
-            } else {
-                next.remove(obj);
+            try {
+                return next.get(index);
+            } catch (IndexOutOfBoundsException e) {
+                throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
             }
         }
     }
 
-    public void remove(int index) {
+    public boolean contains(Object obj) {
+            return next != null && next.contains(obj);
+    }
+
+    public boolean remove(Object obj) {
+        if (next == null) {
+            return false;
+        } else {
+            if (obj.equals(next.getValue())) {
+                next = next.getNext();
+                return true;
+            } else {
+                return next.remove(obj);
+            }
+        }
+    }
+
+    public boolean remove(int index) {
         if (index < 0 || next == null) {
-            return;
+            throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
         }
         if (index == 0) {
             next = next.getNext();
+            return true;
         } else {
-            next.remove(index - 1);
+            try {
+                return next.remove(index - 1);
+            } catch (IndexOutOfBoundsException e) {
+                throw new IndexOutOfBoundsException("size: " + size() + " index: " + index);
+            }
         }
     }
 

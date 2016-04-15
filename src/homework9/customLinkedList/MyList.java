@@ -13,7 +13,7 @@ public interface MyList extends Iterable {
 
     boolean contains(Object value);
 
-    void remove(int index);
+    boolean remove(int index);
 
-    void remove(Object value);
+    boolean remove(Object value);
 }

@@ -24,4 +24,9 @@ public class CustomLinkedListIterator implements Iterator {
         next = next.getNext();
         return value;
     }
+
+    @Override
+    public void remove() {
+
+    }
 }

@@ -34,47 +34,38 @@ public class ListElement {
             return value;
         } else {
             if (next == null) {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return next.get(index - 1);
         }
     }
 
     public boolean contains(Object obj) {
-        if (obj.equals(getValue())) {
-            return true;
-        } else {
-            if (next == null) {
-                return false;
-            } else {
-                return next.contains(obj);
-            }
-        }
+        return obj.equals(getValue()) || next != null && next.contains(obj);
     }
 
-    public void remove(Object obj) {
+    public boolean remove(Object obj) {
         if (next == null) {
-            return;
+            return false;
         } else {
             if (obj.equals(next.getValue())) {
                 next = next.getNext();
+                return true;
             } else {
-                next.remove(obj);
+                return next.remove(obj);
             }
         }
     }
 
-    public void remove(int index) {
-        if (next == null) {
-            if (index > 0) {
-                System.out.println("index out of list size");
-            }
-            return;
+    public boolean remove(int index) {
+        if (next == null && index >= 0) {
+            throw new IndexOutOfBoundsException();
         }
         if (index == 0) {
             next = next.getNext();
+            return true;
         } else {
-            next.remove(index - 1);
+            return next.remove(index - 1);
         }
     }
 

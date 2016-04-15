@@ -39,7 +39,7 @@ public class ImprovedArrayMain {
         }
 
         Iterator iterator = firstArray.iterator();
-        for (; iterator.hasNext();) {
+        while (iterator.hasNext()) {
             if (iterator.next().equals(5)) {
                 iterator.remove();
             }
@@ -48,7 +48,7 @@ public class ImprovedArrayMain {
 
 
         Iterator anotherIterator = firstArray.iterator();
-        for (; anotherIterator.hasNext();) {
+        while (anotherIterator.hasNext()) {
             anotherIterator.remove();
         }
         System.out.println(firstArray);

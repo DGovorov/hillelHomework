@@ -13,35 +13,23 @@ import java.util.Iterator;
 public class ImprovedArrayTest {
 
     @Test
-    public void searchSortedShouldReturnCorrectResults() {
-        ImprovedArray array = new ImprovedArray();
-        array.add(1f);
-        array.add(2f);
-        array.add(3f);
-        array.add(4f);
-        array.add(5f);
+    public void newInstanceShouldBeCreatedEmpty() {
+        MyList list = new ImprovedArray();
 
-        boolean[] expected = new boolean[8];
-        Arrays.fill(expected, true);
-        expected[0] = false;
-        expected[1] = false;
-        expected[7] = false;
-
-        boolean[] results = new boolean[8];
-        results[0] = array.containsSorted(-1f);
-        results[1] = array.containsSorted(0f);
-        results[2] = array.containsSorted(1f);
-        results[3] = array.containsSorted(2f);
-        results[4] = array.containsSorted(3f);
-        results[5] = array.containsSorted(4f);
-        results[6] = array.containsSorted(5f);
-        results[7] = array.containsSorted(6f);
-
-        Assert.assertArrayEquals(expected, results);
+        Assert.assertEquals(0, list.size());
     }
 
     @Test
-    public void indexOutOfBoundExceptionWhenIndexOutOfRange(){
+    public void sizeShouldChangeOnAdd() {
+        MyList list = new ImprovedArray();
+        list.add(new Object());
+        list.add(new Object());
+
+        Assert.assertEquals(2, list.size());
+    }
+
+    @Test
+    public void getShouldThrowIOOBException(){
         MyList array = new ImprovedArray();
         Object element = new Object();
         array.add(element);
@@ -56,7 +44,7 @@ public class ImprovedArrayTest {
     }
 
     @Test
-    public void indexOutOfBoundExceptionWhenIndexIsNegative() {
+    public void getShouldThrowIOOBExceptionWithNegativeIndex() {
         MyList array = new ImprovedArray();
         Object element = new Object();
         array.add(element);
@@ -71,7 +59,22 @@ public class ImprovedArrayTest {
     }
 
     @Test
-    public void indexOutOfBoundExceptionWhileRemovingWithNegativeIndex(){
+    public void removeShouldThrowIOOBException(){
+        MyList array = new ImprovedArray();
+        Object element = new Object();
+        array.add(element);
+        array.add(element);
+
+        try {
+            array.remove(2);
+            Assert.fail();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void removeShouldThrowIOOBExceptionWithNegativeIndex(){
         MyList array = new ImprovedArray();
         Object element = new Object();
         array.add(element);
@@ -86,18 +89,31 @@ public class ImprovedArrayTest {
     }
 
     @Test
-    public void indexOutOfBoundExceptionWhileRemovingWithIndexOutOfRange(){
-        MyList array = new ImprovedArray();
-        Object element = new Object();
-        array.add(element);
-        array.add(element);
+    public void searchSortedShouldReturnCorrectResults() {
+        ImprovedArray array = new ImprovedArray();
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        array.add(4);
+        array.add(5);
 
-        try {
-            array.remove(2);
-            Assert.fail();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
-        }
+        boolean[] expected = new boolean[8];
+        Arrays.fill(expected, true);
+        expected[0] = false;
+        expected[1] = false;
+        expected[7] = false;
+
+        boolean[] results = new boolean[8];
+        results[0] = array.containsSorted(-1);
+        results[1] = array.containsSorted(0);
+        results[2] = array.containsSorted(1);
+        results[3] = array.containsSorted(2);
+        results[4] = array.containsSorted(3);
+        results[5] = array.containsSorted(4);
+        results[6] = array.containsSorted(5);
+        results[7] = array.containsSorted(6);
+
+        Assert.assertArrayEquals(expected, results);
     }
 
     @Test
