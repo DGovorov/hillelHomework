@@ -1,4 +1,4 @@
-package homework9.customLinkedList;
+package customCollection;
 
 /**
  * Created by Dim on 31.03.2016.

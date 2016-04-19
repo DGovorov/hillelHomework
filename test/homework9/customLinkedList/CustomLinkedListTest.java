@@ -1,5 +1,7 @@
 package homework9.customLinkedList;
 
+import customCollection.customLinkedList.CustomLinkedList;
+import customCollection.MyList;
 import org.junit.Test;
 import org.junit.Assert;
 

@@ -1,4 +1,6 @@
-package homework9.customLinkedList;
+package customCollection.customLinkedList;
+
+import customCollection.MyList;
 
 import java.util.Iterator;
 

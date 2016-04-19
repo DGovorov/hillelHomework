@@ -1,6 +1,7 @@
 package homework7.improvedArray;
 
-import homework9.customLinkedList.MyList;
+import customCollection.MyList;
+import customCollection.improvedArray.ImprovedArray;
 import org.junit.Assert;
 import org.junit.Test;
 

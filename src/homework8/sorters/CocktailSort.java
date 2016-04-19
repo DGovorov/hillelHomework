@@ -1,6 +1,6 @@
 package homework8.sorters;
 
-import homework7.improvedArray.ImprovedArray;
+import customCollection.improvedArray.ImprovedArray;
 
 /**
  * Created by Dim on 17.03.2016.

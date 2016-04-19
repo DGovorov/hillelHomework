@@ -1,4 +1,4 @@
-package homework7.improvedArray;
+package customCollection.improvedArray;
 
 import java.util.Iterator;
 

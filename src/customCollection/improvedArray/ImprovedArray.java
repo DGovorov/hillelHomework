@@ -1,6 +1,6 @@
-package homework7.improvedArray;
+package customCollection.improvedArray;
 
-import homework9.customLinkedList.MyList;
+import customCollection.MyList;
 
 import java.util.Iterator;
 

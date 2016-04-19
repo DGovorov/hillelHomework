@@ -1,6 +1,6 @@
 package homework8.sorters;
 
-import homework7.improvedArray.ImprovedArray;
+import customCollection.improvedArray.ImprovedArray;
 import homework8.comparisonKeys.ComparableObjects;
 import homework8.comparisonKeys.ComparisonKeys;
 
