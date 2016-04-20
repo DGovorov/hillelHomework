@@ -1,92 +1,99 @@
 package customCollection;
 
 import customCollection.customLinkedList.CustomLinkedList;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Created by Dim on 14.04.2016.
  */
 public class CustomHashSet {
 
-    private MyList[] elements = new CustomLinkedList[10];
-    private int loadFactor;
+    private MyList[] buckets = new CustomLinkedList[10];
+    private int elementCounter;
+    private double loadFactor;
+
+    public CustomHashSet() {
+        loadFactor = 0.75;
+    }
+
+    public CustomHashSet(double loadFactor) {
+        if (loadFactor > 0) {
+            this.loadFactor = loadFactor;
+        } else {
+            this.loadFactor = 0.75;
+        }
+    }
 
     public void add(Object obj) {
-        if (isOverLoaded()){
+        if (isOverLoaded()) {
             resize();
         }
 
-        addElement(obj, elements);
+        addElement(obj, buckets);
     }
 
+    //OPTIMIZE ME
     private void addElement(Object obj, MyList[] elements) {
-        int index = calculateIndex(obj);
+        int index = calculateIndex(obj, elements.length);
 
-        if (elements[index] != null && !contains(obj)) {
+        if (elements[index] != null && !elements[index].contains(obj)) {
             elements[index].add(obj);
+            elementCounter++;
         } else {
-
             MyList toAdd = new CustomLinkedList();
             toAdd.add(obj);
             elements[index] = toAdd;
-            loadFactor++;
+            elementCounter++;
         }
     }
 
     //OPTIMIZE ME
     private void resize() {
-        loadFactor = 0;
-        int oldSize = elements.length;
+        elementCounter = 0;
+        int oldSize = buckets.length;
         int newSize = oldSize * 2;
         MyList[] newElements = new CustomLinkedList[newSize];
 
-        for (MyList list : elements) {
+        for (MyList list : buckets) {
             if (list != null) {
                 for (Object obj : list) {
                     addElement(obj, newElements);
                 }
             }
         }
-        elements = newElements;
+        buckets = newElements;
     }
 
-
-
-    //Unnecessary double variables
     private boolean isOverLoaded() {
-        double filledCells = loadFactor;
-        double totalCells = elements.length;
-
-        return (filledCells / totalCells) > 0.7;
+        return (elementCounter / buckets.length) > loadFactor;
     }
 
     private int calculateIndex(Object obj) {
-        return obj.hashCode() % elements.length;
+        return obj.hashCode() % buckets.length;
     }
 
-    //DELETE ME
-    public int getLoadFactor() {
-        return loadFactor;
+    private int calculateIndex(Object obj, int bucketsLength) {
+        return obj.hashCode() % bucketsLength;
     }
 
     //DELETE ME
     public MyList getList(int index) {
-        return elements[index];
+        return buckets[index];
     }
 
-    //DELETE ME
     public int size() {
-        return elements.length;
+        return elementCounter;
     }
 
     public boolean remove(Object obj) {
         int index = calculateIndex(obj);
 
-        return (elements[index] != null) && elements[index].remove(obj);
+        return (buckets[index] != null) && buckets[index].remove(obj);
     }
 
-    public boolean removeAll(Object obj){
+    public boolean removeAll(Object obj) {
         boolean didRemove = false;
-        while (contains(obj)){
+        while (contains(obj)) {
             remove(obj);
             didRemove = true;
         }
@@ -96,6 +103,6 @@ public class CustomHashSet {
     public boolean contains(Object obj) {
         int index = calculateIndex(obj);
 
-        return (elements[index] != null) && elements[index].contains(obj);
+        return (buckets[index] != null) && buckets[index].contains(obj);
     }
 }

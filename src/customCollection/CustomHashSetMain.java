@@ -1,7 +1,5 @@
 package customCollection;
 
-import homework7.animals.Cat;
-
 import java.io.*;
 import java.util.Random;
 
@@ -14,19 +12,12 @@ public class CustomHashSetMain {
 
 
         Random r = new Random();
-        for (int i = 0; i < 60; i++) {
-            set.add(r.nextInt(100));
+        for (int i = 0; i < 2000; i++) {
+            set.add(r.nextInt(100_000));
         }
 
-        set.add(new Cat(7602, "Barsik", 12, 3, "blue", true));
-        set.add(new Cat(5042, "Murzik", 12, 3, "blue", true));
-        set.add(new Cat(2152, "Vas'ka", 12, 3, "blue", true));
-        set.add(new Cat(1512, "Crawford", 12, 3, "blue", true));
-        set.add(new Cat(6123, "Sherlock", 12, 3, "blue", true));
-
-
         System.out.println();
-        System.out.println("number of filled cells: " + set.getLoadFactor());
+        System.out.println("number of filled cells: " + set.size());
 
         System.out.println(set.removeAll(0));
         bufferedWrite(set);
@@ -43,7 +34,7 @@ public class CustomHashSetMain {
                 } else {
                     writer.write("null\t");
                 }
-                if (i % 10 == 9){
+                if (i % 10 == 9) {
                     writer.newLine();
                 }
             }
