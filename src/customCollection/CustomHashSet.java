@@ -1,7 +1,6 @@
 package customCollection;
 
 import customCollection.customLinkedList.CustomLinkedList;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Created by Dim on 14.04.2016.
@@ -10,17 +9,17 @@ public class CustomHashSet {
 
     private MyList[] buckets = new CustomLinkedList[10];
     private int elementCounter;
-    private double loadFactor;
+    private double loadFactor = 0.75;
 
     public CustomHashSet() {
-        loadFactor = 0.75;
+
     }
 
     public CustomHashSet(double loadFactor) {
         if (loadFactor > 0) {
             this.loadFactor = loadFactor;
         } else {
-            this.loadFactor = 0.75;
+            throw new NegativeLoadFactorException();
         }
     }
 
