@@ -28,11 +28,11 @@ public class CustomHashSetTest {
     public void sizeShouldNotChangeOnAddingDuplicate() {
         CustomHashSet set = new CustomHashSet();
 
-        set.add(1);
+        set.add(21);
         set.add(1);
         set.add(1);
 
-        Assert.assertEquals(1, set.size());
+        Assert.assertEquals(2, set.size());
     }
 
     @Test
