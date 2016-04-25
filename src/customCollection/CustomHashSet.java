@@ -28,39 +28,37 @@ public class CustomHashSet {
             resize();
         }
 
-        addElement(obj, buckets);
+        addElement(obj);
     }
 
-    //OPTIMIZE ME
-    private void addElement(Object obj, MyList[] elements) {
-        int index = calculateIndex(obj, elements.length);
+    private void addElement(Object obj) {
+        int index = calculateIndex(obj);
 
-        if (elements[index] != null && !elements[index].contains(obj)) {
-            elements[index].add(obj);
-            elementCounter++;
-        } else {
+        if (buckets[index] == null){
             MyList toAdd = new CustomLinkedList();
             toAdd.add(obj);
-            elements[index] = toAdd;
+            buckets[index] = toAdd;
+            elementCounter++;
+        } else if (!buckets[index].contains(obj)){
+            buckets[index].add(obj);
             elementCounter++;
         }
     }
 
-    //OPTIMIZE ME
     private void resize() {
         elementCounter = 0;
         int oldSize = buckets.length;
         int newSize = oldSize * 2;
-        MyList[] newElements = new CustomLinkedList[newSize];
+        MyList[] oldBuckets = buckets;
+        this.buckets = new CustomLinkedList[newSize];
 
-        for (MyList list : buckets) {
-            if (list != null) {
-                for (Object obj : list) {
-                    addElement(obj, newElements);
+        for (MyList bucket : oldBuckets) {
+            if (bucket != null) {
+                for (Object obj : bucket) {
+                    addElement(obj);
                 }
             }
         }
-        buckets = newElements;
     }
 
     private boolean isOverLoaded() {
@@ -68,16 +66,7 @@ public class CustomHashSet {
     }
 
     private int calculateIndex(Object obj) {
-        return obj.hashCode() % buckets.length;
-    }
-
-    private int calculateIndex(Object obj, int bucketsLength) {
-        return obj.hashCode() % bucketsLength;
-    }
-
-    //DELETE ME
-    public MyList getList(int index) {
-        return buckets[index];
+        return Math.abs(obj.hashCode() % buckets.length);
     }
 
     public int size() {
@@ -87,16 +76,12 @@ public class CustomHashSet {
     public boolean remove(Object obj) {
         int index = calculateIndex(obj);
 
-        return (buckets[index] != null) && buckets[index].remove(obj);
-    }
-
-    public boolean removeAll(Object obj) {
-        boolean didRemove = false;
-        while (contains(obj)) {
-            remove(obj);
-            didRemove = true;
+        if ((buckets[index] != null) && buckets[index].remove(obj)){
+            elementCounter--;
+            return true;
+        } else {
+            return false;
         }
-        return didRemove;
     }
 
     public boolean contains(Object obj) {
@@ -104,4 +89,5 @@ public class CustomHashSet {
 
         return (buckets[index] != null) && buckets[index].contains(obj);
     }
+
 }
