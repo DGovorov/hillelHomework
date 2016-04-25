@@ -39,7 +39,7 @@ public class FileGenerator {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true), 4)) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             int iterations = kilobytes*1024/3; //awful workaround
             for (int i = 0; i < iterations; i++) {
                 writer.write(Integer.MAX_VALUE);
